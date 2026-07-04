@@ -8,10 +8,12 @@
   - https://www.icloud.com/iclouddrive/08bDP4DoaE9d_Sxa1YnP8HBug
   - https://www.icloud.com/iclouddrive/073KD3sfxjFEGjy1NBMCZVLrQ
 
-> Access note: the session environment's network policy must allow
-> `drive.google.com`, `*.googleusercontent.com`, `*.icloud.com`, and
-> `*.icloud-content.com` for direct pulls, plus
-> `services.leadconnectorhq.com` for GHL API publishing.
+> Access status (2026-07-04): network policy opened — Drive pulls **working**
+> (see `drive-inventory.md`). iCloud links resolve but are set to
+> "Only invited people" (`publicPermission: NONE`); owner must switch each
+> share to **"Anyone with the link"** before pulls work.
+> GHL API host reachable; awaiting `GHL_PI_TOKEN` + `GHL_LOCATION_ID`
+> environment variables.
 
 Three storage layers feed the content machine:
 
