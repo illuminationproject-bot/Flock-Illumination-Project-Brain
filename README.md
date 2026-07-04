@@ -15,6 +15,8 @@ This repo is the operating system for social content and marketing across two br
 03-marketing/       GHL + Skool integrated marketing system (funnels, automations, nurture)
 04-analytics/       Weekly analytics report template + KPI definitions
 05-ideas/           Content pillars + daily content ideas (3/day, logged by date)
+06-pipeline/        Footage bank (Drive + iCloud archive) and GHL API publishing setup
+scripts/            ghl_publish.py — schedules posts through the GHL API
 ```
 
 ## The weekly rhythm
