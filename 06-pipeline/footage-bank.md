@@ -1,5 +1,18 @@
 # Footage Bank & Asset Pipeline
 
+## Source locations (provided by owner, 2026-07-04)
+
+- **Google Drive content dump folder:** https://drive.google.com/drive/folders/1yA-_XBl0QW20J1R0pgRvK3SrVyLe-fUM (folder ID `1yA-_XBl0QW20J1R0pgRvK3SrVyLe-fUM`)
+- **iCloud archive (all footage ever):**
+  - VIDEO: https://www.icloud.com/iclouddrive/0eb_iPGDJ4Vyq9q8DUyZ62ZAg#VIDEO
+  - https://www.icloud.com/iclouddrive/08bDP4DoaE9d_Sxa1YnP8HBug
+  - https://www.icloud.com/iclouddrive/073KD3sfxjFEGjy1NBMCZVLrQ
+
+> Access note: the session environment's network policy must allow
+> `drive.google.com`, `*.googleusercontent.com`, `*.icloud.com`, and
+> `*.icloud-content.com` for direct pulls, plus
+> `services.leadconnectorhq.com` for GHL API publishing.
+
 Three storage layers feed the content machine:
 
 ```
