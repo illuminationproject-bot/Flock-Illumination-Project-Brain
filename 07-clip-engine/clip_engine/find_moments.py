@@ -59,7 +59,9 @@ TRANSCRIPT (each line: [start-end] text):
         model=MODEL, max_tokens=4000, system=system,
         messages=[{"role": "user", "content": user}],
     )
-    clips = _parse_json(resp.content[0].text)["clips"]
+    # Models may emit thinking blocks before the text block — join only text content.
+    reply_text = "".join(getattr(block, "text", "") for block in resp.content)
+    clips = _parse_json(reply_text)["clips"]
     clips = [_snap_to_words(c, words) for c in clips]
     clips = [c for c in clips if c]                      # drop un-snappable
     clips.sort(key=lambda c: c.get("score", 0), reverse=True)
