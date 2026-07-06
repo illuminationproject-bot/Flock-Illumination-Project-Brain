@@ -55,8 +55,9 @@ TRANSCRIPT (each line: [start-end] text):
 {transcript}"""
 
     client = Anthropic()
+    # Generous ceiling: models with extended thinking spend tokens before the JSON answer.
     resp = client.messages.create(
-        model=MODEL, max_tokens=4000, system=system,
+        model=MODEL, max_tokens=16000, system=system,
         messages=[{"role": "user", "content": user}],
     )
     # Models may emit thinking blocks before the text block — join only text content.
@@ -99,7 +100,16 @@ def _snap_to_words(clip: dict, words: list[dict]) -> dict | None:
 
 
 def _parse_json(text: str) -> dict:
+    """Extract the JSON object from a model reply, tolerating fences and surrounding prose."""
     text = text.strip()
     if text.startswith("```"):
         text = text.split("```")[1].removeprefix("json").strip()
-    return json.loads(text)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        start, end = text.find("{"), text.rfind("}")
+        if start != -1 and end > start:
+            return json.loads(text[start:end + 1])
+        raise RuntimeError(
+            f"model reply contained no JSON (length {len(text)}; first 300 chars: {text[:300]!r})"
+        )
