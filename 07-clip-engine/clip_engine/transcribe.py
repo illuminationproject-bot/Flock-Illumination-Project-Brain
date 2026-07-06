@@ -29,6 +29,8 @@ def transcribe(video: Path, work: Path, backend: str | None = None,
     out = work / "words.json"
     if backend == "mlx":
         words = _mlx(video, model=model)
+    elif backend in ("faster", "faster_whisper"):
+        words = _faster_whisper(video, model=model)
     elif backend == "whisperx":
         words = _whisperx(video, model=model, diarize=diarize)
     elif backend == "deepgram":
@@ -37,6 +39,32 @@ def transcribe(video: Path, work: Path, backend: str | None = None,
         raise ValueError(f"unknown transcribe backend: {backend}")
     write_json(out, {"words": words})
     return out
+
+
+def _faster_whisper(video: Path, model: str) -> list[dict]:
+    """faster-whisper — light, no alignment/diarization deps, word timestamps built in.
+
+    Good default for Colab/Windows/Linux without a full WhisperX install. Single speaker.
+    """
+    from faster_whisper import WhisperModel
+
+    device = "cuda" if _has_cuda() else "cpu"
+    compute = "float16" if device == "cuda" else "int8"
+    size = {"large-v2": "large-v2", "large-v3": "large-v3", "medium": "medium"}.get(model, "medium")
+
+    m = WhisperModel(size, device=device, compute_type=compute)
+    segments, _ = m.transcribe(str(video), word_timestamps=True, vad_filter=True)
+
+    words: list[dict] = []
+    for seg in segments:
+        for w in (seg.words or []):
+            words.append({
+                "word": w.word.strip(),
+                "start": round(float(w.start), 3),
+                "end": round(float(w.end), 3),
+                "speaker": "SPEAKER_00",
+            })
+    return words
 
 
 def _mlx(video: Path, model: str) -> list[dict]:
