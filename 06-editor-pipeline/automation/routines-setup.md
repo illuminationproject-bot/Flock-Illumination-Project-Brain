@@ -43,9 +43,11 @@ THEN:
 4. Write the complete package into the Notion row's page content.
 5. Create one Asana task in project "🎬 Content Packages — Editor Pipeline"
    (gid 1216276848891492), section "📦 Package Ready" (gid 1216276866586841), assigned to
-   Tristan Corbet (gid 1203755048167937), due per the row's Deadline, description linking
-   the Notion row and Drive folder, with subtasks mirroring template task 1216276661825284.
-6. Create a Gmail DRAFT (never send) to kscorbettfc@gmail.com using the handoff template.
+   LOGAN (the editor — gid + email TBD, confirm before arming), due per the row's Deadline,
+   description linking the Notion row and Drive folder, with subtasks mirroring template
+   task 1216276661825284.
+6. Create a Gmail DRAFT (never send) to LOGAN'S EMAIL (TBD — confirm before arming) using
+   the handoff template.
 7. Append "🤖 AI package prepared <today's date>" to the row's Notes. Status stays Editing.
 
 Rules: drafts only, never send email; never change any Status other than described; if a

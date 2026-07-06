@@ -1,0 +1,19 @@
+# Core
+anthropic>=0.40.0        # Claude — moment detection, titles, captions copy
+yt-dlp>=2024.0.0         # ingest from YouTube URLs
+pyyaml>=6.0              # brand config
+
+# Transcription (word-level timestamps). WhisperX pulls torch + faster-whisper.
+# If you'd rather not run a GPU, comment these out and use the Deepgram seam in transcribe.py
+whisperx>=3.1.1
+# deepgram-sdk>=3.0.0    # optional no-GPU alternative
+
+# Reframe (16:9 -> 9:16 speaker tracking)
+mediapipe>=0.10.9
+opencv-python>=4.9.0
+numpy>=1.26.0
+
+# ffmpeg is a SYSTEM dependency, not pip — install separately:
+#   macOS:  brew install ffmpeg
+#   Ubuntu: sudo apt install ffmpeg
+# Must include libass (it does, in standard builds) for burned captions.

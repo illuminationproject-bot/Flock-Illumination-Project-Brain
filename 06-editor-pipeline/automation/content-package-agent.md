@@ -25,8 +25,9 @@ marker `🤖 AI package prepared` are already done and get skipped (idempotency)
 6. **Write the package into the Notion row** (page content): brief, edit map, packaging,
    shorts list — so the workflow lives where the editor already looks.
 7. **Create Asana tasks** in the *Content Packages — Editor Pipeline* project, section
-   *📦 Package Ready*: one parent task per package assigned to the editor, due per the row's
-   Deadline, with subtasks per deliverable and links to the Notion row + Drive folder.
+   *📦 Package Ready*: one parent task per package assigned to **Logan** (the editor), due per
+   the row's Deadline, with subtasks per deliverable and links to the Notion row + Drive
+   folder. *(Logan's Asana gid + email TBD — confirm before arming; placeholder until then.)*
 8. **Draft the handoff email** in Gmail (draft only, never auto-send) from
    `../editor-handoff-email-template.md`.
 9. **Stamp the row:** append `🤖 AI package prepared <date>` to Notes. Status stays
@@ -37,7 +38,7 @@ If no rows qualify, the run ends silently.
 ## What stays human
 
 - TJ: record, set Status = Editing, drop the voice note, Gate 1 green-light, Gate 2 QC.
-- Editor (Premiere + After Effects): the actual edit, animation, grade, sound, caption
+- Logan (Premiere + After Effects): the actual edit, animation, grade, sound, caption
   styling, final PSD thumbnails built from the AI's PNG mockups.
 
 ## Known limits (be honest with yourself, agent)

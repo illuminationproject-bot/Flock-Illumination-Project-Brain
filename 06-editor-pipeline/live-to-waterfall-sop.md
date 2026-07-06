@@ -10,16 +10,24 @@ editor package → email). The v1 steps all survive — each stage below names w
 **Division of labor, one line:** AI decides *what* (selects, structure, packaging research,
 rough cuts). The editor decides *how it feels* (pacing, motion, grade, sound, final design).
 
-**Confirmed decisions (TJ, 2026-07-04):**
+**Confirmed decisions (TJ, 2026-07-06):**
+- Editor: **Logan** (Premiere Pro + After Effects)
 - Cadence: **1–2 lives/week plus a few live coaching calls** — calls enter at Stage 0 like any recording
 - Canonical NLE: **Premiere Pro + After Effects** — rough cuts hand off as Premiere
   text-based-editing projects / XML; AE owns animation and motion polish
-- Thumbnails: **AI supplies PNG mockups; the editor builds the final layered PSDs** from them
+- Thumbnails: **AI supplies PNG mockups; Logan builds the final layered PSDs** from them
 - Approvals: **approve-by-exception confirmed** — the autonomy ladder below is live, and
-  shorts skip pre-approval once the editor reaches Level 2
+  shorts skip pre-approval once Logan reaches Level 2
 - Task management: packages are assigned in **Asana** (*Content Packages — Editor Pipeline*
   project); the workflow itself lives in the Notion 🎬 Shoot Briefs database
 - Automation: the AI lane (Stages 1–6) runs as a scheduled agent — see `automation/`
+
+**Two layers of "AI does the rough edit":**
+- `06-editor-pipeline/` (this doc) is the **brain** — decides *what* clips exist, writes the
+  brief, cut list, titles, thumbnail mockups. Hands instructions to Logan.
+- `07-clip-engine/` is the **hands** — an Opus.pro-style renderer that turns a recording into
+  actual captioned 9:16 clips. When it's live, Stage 4 (shorts) outputs *rendered rough clips*
+  Logan polishes, not just a cut list. Until then, Logan cuts from the brief.
 
 Companion docs:
 - `editor-creative-brief-template.md` — the brief that rides with every package

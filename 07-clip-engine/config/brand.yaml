@@ -1,0 +1,51 @@
+# Brand config — the single source of truth for how clips look and sound.
+# Change captions/pacing HERE, not in code. This is the "customization" Opus won't give you.
+
+captions:
+  font: "Montserrat"          # must be installed on the render machine
+  weight: "Black"             # 900 — the bold Hormozi-standard look
+  size: 20                    # ASS units (scales with the 1080-wide vertical frame)
+  primary_color: "&H00FFFFFF" # white (ASS is &H00BBGGRR)
+  # Keyword highlight colors — 2026 best practice: use BRAND colors, not neon.
+  # Illumination Project amber + Flock accent. Swap for your real hex.
+  highlight_colors:
+    - "&H0004C4F7"            # amber  (#F7C404)
+    - "&H0023FB02"            # green  (#02FB23) — use sparingly
+  outline: 3                  # thick outline for scroll-legibility
+  shadow: 1
+  position: "center"          # center-screen, high-contrast
+  uppercase: true
+  words_per_cue: 3            # karaoke reveals ~3 words at a time
+  max_emojis_per_clip: 0      # brand rule: clean, few/no emojis
+
+audio:
+  music_bed_db: -20           # IP music under talk content at -20dB (brand non-negotiable)
+  music_never_under_teaching: true
+
+reframe:
+  target_ratio: "9:16"
+  smoothing: 0.85             # crop-motion smoothing (0=jittery, 1=frozen). 0.8-0.9 is calm.
+  recenter_on_scene_cut: true
+
+clips:
+  min_seconds: 18
+  max_seconds: 75
+  hook_must_land_within_seconds: 3
+  drop_internal_filler: true  # concatenate sub-segments to cut umms mid-clip
+
+# Faith / production vocabulary the transcriber gets wrong. Fixed before captions burn in.
+# left = what Whisper tends to output, right = correct. Case-insensitive match, case preserved.
+vocab_fixups:
+  "a sath": "Asaph"
+  "assaf": "Asaph"
+  "flock talk": "Flock Talk"
+  "illumination project": "Illumination Project"
+  "skool": "Skool"
+  "gable price": "Gable Price"
+  "forest frank": "Forrest Frank"
+
+# Audience frame for moment-finding — this is why the engine beats generic virality scoring.
+audience: >
+  25-35 year old worship pastors and creative directors, reformed-evangelical leaning,
+  often creatively dry or burned out. Pastoral, not hype. Score clips on resonance with
+  THIS person, not generic virality.
