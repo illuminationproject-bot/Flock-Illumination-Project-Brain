@@ -10,6 +10,17 @@ editor package → email). The v1 steps all survive — each stage below names w
 **Division of labor, one line:** AI decides *what* (selects, structure, packaging research,
 rough cuts). The editor decides *how it feels* (pacing, motion, grade, sound, final design).
 
+**Confirmed decisions (TJ, 2026-07-04):**
+- Cadence: **1–2 lives/week plus a few live coaching calls** — calls enter at Stage 0 like any recording
+- Canonical NLE: **Premiere Pro + After Effects** — rough cuts hand off as Premiere
+  text-based-editing projects / XML; AE owns animation and motion polish
+- Thumbnails: **AI supplies PNG mockups; the editor builds the final layered PSDs** from them
+- Approvals: **approve-by-exception confirmed** — the autonomy ladder below is live, and
+  shorts skip pre-approval once the editor reaches Level 2
+- Task management: packages are assigned in **Asana** (*Content Packages — Editor Pipeline*
+  project); the workflow itself lives in the Notion 🎬 Shoot Briefs database
+- Automation: the AI lane (Stages 1–6) runs as a scheduled agent — see `automation/`
+
 Companion docs:
 - `editor-creative-brief-template.md` — the brief that rides with every package
 - `editor-handoff-email-template.md` — the handoff email/Loom script
@@ -134,9 +145,10 @@ PACKAGE/
 └── 05-references/           ← links: 2–3 reference videos for THIS package + Brand Guide
 ```
 
-**PSD note:** AI can't produce layered PSDs. The move is a **master PSD template per content
-type** (built once by the editor, approved by TJ) with locked brand layers + swappable
-text/image layers. AI comps show *what* to make; the PSD is *where* it gets made.
+**PSD note (confirmed):** AI supplies **PNG mockups**; the editor designs the final layered
+PSDs from them. The move is a **master PSD template per content type** (built once by the
+editor, approved by TJ) with locked brand layers + swappable text/image layers. AI comps
+show *what* to make; the PSD is *where* it gets made.
 
 ## Stage 6 — Handoff (was: "prepare and draft email")
 
