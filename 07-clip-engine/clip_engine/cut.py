@@ -29,20 +29,22 @@ def cut(source: Path, clip: dict, work: Path, config: dict, gap_threshold: float
         return out
 
     # Multi-segment: trim each run, then concat. Keeps A/V in sync per piece.
+    # Re-encode on concat (not -c copy) so segments with independent GOPs join cleanly.
     parts = []
     for i, (s, e) in enumerate(segments):
         p = work / f"part_{i:02d}.mp4"
         run([
-            "ffmpeg", "-y", "-ss", f"{s:.3f}", "-to", f"{e:.3f}", "-i", str(source),
-            "-c:v", "libx264", "-c:a", "aac", "-preset", "veryfast", str(p),
+            "ffmpeg", "-y", "-ss", f"{s:.3f}", "-to", f"{e:.3f}", "-i", str(source.resolve()),
+            "-c:v", "libx264", "-c:a", "aac", "-preset", "veryfast", str(p.resolve()),
         ])
         parts.append(p)
     concat_file = work / "concat.txt"
-    concat_file.write_text("".join(f"file '{p.name}'\n" for p in parts))
+    # Absolute paths inside the list so the concat demuxer resolves regardless of cwd.
+    concat_file.write_text("".join(f"file '{p.resolve()}'\n" for p in parts))
     run([
-        "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
-        "-c", "copy", str(out),
-    ], cwd=str(work))
+        "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file.resolve()),
+        "-c:v", "libx264", "-c:a", "aac", "-preset", "veryfast", str(out.resolve()),
+    ])
     return out
 
 

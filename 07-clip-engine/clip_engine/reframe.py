@@ -17,27 +17,32 @@ from pathlib import Path
 
 from .util import probe_dimensions, run
 
+OUT_W, OUT_H = 1080, 1920                          # canonical vertical canvas (matches captions)
+
 
 def reframe(clip_video: Path, work: Path, config: dict) -> Path:
     out = work / "reframe.mp4"
     W, H = probe_dimensions(clip_video)
-    target_w = int(round(H * 9 / 16))            # crop width for a 9:16 window at full height
+    target_w = int(round(H * 9 / 16)) & ~1         # crop width (force even for libx264)
 
-    if target_w >= W:                             # already vertical-ish: just pad/scale
+    if target_w >= W:                              # already vertical-ish: crop then normalize
         run(["ffmpeg", "-y", "-i", str(clip_video),
-             "-vf", f"scale=-2:{H},crop={min(W, target_w)}:{H}",
+             "-vf", f"crop={min(W, target_w)}:{H},scale={OUT_W}:{OUT_H}",
              "-c:a", "copy", str(out)])
         return out
 
     centers = _tracked_centers(clip_video, W, H, config)
     if not centers:
-        # Static center crop fallback
+        # Static center crop fallback, upscaled to the canonical canvas
         x = (W - target_w) // 2
         run(["ffmpeg", "-y", "-i", str(clip_video),
-             "-vf", f"crop={target_w}:{H}:{x}:0", "-c:a", "copy", str(out)])
+             "-vf", f"crop={target_w}:{H}:{x}:0,scale={OUT_W}:{OUT_H}",
+             "-c:a", "copy", str(out)])
         return out
 
     # Build a time-varying crop x-expression from smoothed centers via ffmpeg sendcmd.
+    # sendcmd needs a relative filename (its path parser chokes on ':' etc), so we run with
+    # cwd=work and reference the basename, while input/output stay absolute.
     cmds = work / "crop.cmd"
     half = target_w / 2
     lines = []
@@ -45,9 +50,9 @@ def reframe(clip_video: Path, work: Path, config: dict) -> Path:
         x = max(0, min(W - target_w, cx - half))
         lines.append(f"{t:.2f} crop x {x:.1f};")
     cmds.write_text("\n".join(lines))
-    run(["ffmpeg", "-y", "-i", str(clip_video),
-         "-vf", f"crop={target_w}:{H}:0:0,sendcmd=f={cmds.name}",
-         "-c:a", "copy", str(out)], cwd=str(work))
+    run(["ffmpeg", "-y", "-i", str(clip_video.resolve()),
+         "-vf", f"sendcmd=f={cmds.name},crop={target_w}:{H}:0:0,scale={OUT_W}:{OUT_H}",
+         "-c:a", "copy", str(out.resolve())], cwd=str(work))
     return out
 
 
