@@ -57,18 +57,23 @@ def reframe(clip_video: Path, work: Path, config: dict) -> Path:
 
 
 def _tracked_centers(video: Path, W: int, H: int, config: dict, fps_sample: float = 4.0):
-    """Sample frames, find dominant face center-x per sample, exponentially smooth the path."""
+    """Sample frames, find dominant face center-x per sample, exponentially smooth the path.
+
+    Any failure here (missing libs, mediapipe API changes, codec issues) returns [] so the
+    caller falls back to a static center crop instead of crashing the pipeline.
+    """
     try:
         import cv2
         import mediapipe as mp
-    except Exception:
+        detector = mp.solutions.face_detection.FaceDetection(model_selection=1,
+                                                             min_detection_confidence=0.5)
+    except Exception as e:
+        print(f"    (face tracking unavailable — center crop instead: {e})")
         return []
 
     cap = cv2.VideoCapture(str(video))
     src_fps = cap.get(cv2.CAP_PROP_FPS) or 30
     step = max(1, int(src_fps / fps_sample))
-    detector = mp.solutions.face_detection.FaceDetection(model_selection=1,
-                                                         min_detection_confidence=0.5)
     smoothing = float(config["reframe"].get("smoothing", 0.85))
 
     raw = []
