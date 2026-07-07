@@ -50,7 +50,9 @@ def _faster_whisper(video: Path, model: str) -> list[dict]:
 
     device = "cuda" if _has_cuda() else "cpu"
     compute = "float16" if device == "cuda" else "int8"
-    size = {"large-v2": "large-v2", "large-v3": "large-v3", "medium": "medium"}.get(model, "medium")
+    # CLIP_ENGINE_ASR_MODEL overrides (e.g. "small" for fast CPU runs); else map the request.
+    size = os.getenv("CLIP_ENGINE_ASR_MODEL") or \
+        {"large-v2": "large-v2", "large-v3": "large-v3", "medium": "medium"}.get(model, "medium")
 
     m = WhisperModel(size, device=device, compute_type=compute)
     segments, _ = m.transcribe(str(video), word_timestamps=True, vad_filter=True)

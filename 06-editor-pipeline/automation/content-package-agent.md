@@ -41,12 +41,25 @@ If no rows qualify, the run ends silently.
 - Logan (Premiere + After Effects): the actual edit, animation, grade, sound, caption
   styling, final PSD thumbnails built from the AI's PNG mockups.
 
+## Rendering real clips (proven in-session, 2026-07-07)
+
+The agent doesn't just write cut lists — it RUNS `07-clip-engine/` inside its own session:
+
+1. `pip install faster-whisper imageio-ffmpeg pyyaml` (+ symlink the imageio ffmpeg binary
+   onto PATH; no system ffmpeg needed)
+2. Get the source video **from Google Drive via the Drive MCP tool** — NOT from YouTube
+   (YouTube's CDN blocks datacenter IPs; TJ's RAW folder in Drive is the ingest point)
+3. `CLIP_ENGINE_ASR=faster_whisper CLIP_ENGINE_ASR_MODEL=small` → transcribe
+4. Read the transcript, pick clips, write `my_clips.json` — the agent IS the brain, so
+   `run.py --clips-file my_clips.json` needs **no Anthropic API key**
+5. Upload finished clips + sidecar JSONs back to the Drive package folder
+
 ## Known limits (be honest with yourself, agent)
 
-- No Descript/Opus API access from this environment — timeline-level rough cuts still happen
-  in Descript/Premiere text-based editing; the agent supplies the *cut list* the editor (or a
-  content assistant) applies in minutes.
-- YouTube auto-captions mangle names and worship vocabulary — the Edit Map's caption-flags
-  section exists precisely because of this.
+- YouTube downloads fail from datacenter IPs (403/bot-check) — always ingest from Drive.
+- CPU transcription: use `small` model; a 60-min recording takes a while — process the
+  Edit Map first, render clips second, so a slow run still delivers the packaging.
+- Face tracking may be unavailable (no cv2/mediapipe) — the engine center-crops
+  automatically; note it in the handoff so Logan checks framing.
 - Cron minimum is hourly; daily is the chosen cadence. A just-ended live gets packaged the
   next morning.

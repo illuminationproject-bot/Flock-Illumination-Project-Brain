@@ -20,7 +20,10 @@ from .util import load_config, run, slugify, write_json
 
 def process(source: str, out_dir: Path, work_root: Path, *, mode: str = "talk",
             max_clips: int = 6, music: Path | None = None,
-            config_path: str | None = None) -> list[Path]:
+            config_path: str | None = None, clips_file: str | None = None) -> list[Path]:
+    """Run the full pipeline. If clips_file is given (a clips.json produced by any brain —
+    an agent session, a human, or a previous run), skip the Claude API call and use it.
+    This lets the engine run with NO API key when an AI agent is already in the loop."""
     config = load_config(config_path) if config_path else load_config()
     out_dir.mkdir(parents=True, exist_ok=True)
     job = work_root / slugify(source.split("/")[-1] or "job")
@@ -36,8 +39,16 @@ def process(source: str, out_dir: Path, work_root: Path, *, mode: str = "talk",
             "speech-based moment finding. Use --mode talk for now."
         )
 
-    print("4/8 find moments…");  clips_json = find_mod.find_moments(words, job, config, max_clips)
-    clips = _read(clips_json)["clips"]
+    if clips_file:
+        print("4/8 find moments… (using provided clips file)")
+        provided = _read(Path(clips_file))["clips"]
+        all_words = _read(words)["words"]
+        clips = [c for c in (find_mod._snap_to_words(dict(c), all_words) for c in provided) if c]
+        clips = clips[:max_clips]
+    else:
+        print("4/8 find moments…")
+        clips_json = find_mod.find_moments(words, job, config, max_clips)
+        clips = _read(clips_json)["clips"]
     print(f"    found {len(clips)} clips")
 
     finals: list[Path] = []

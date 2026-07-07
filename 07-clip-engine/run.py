@@ -23,6 +23,8 @@ def main() -> None:
     ap.add_argument("--max-clips", type=int, default=6)
     ap.add_argument("--music", default=None, help="optional music bed (mixed at brand -20dB)")
     ap.add_argument("--config", default=None, help="path to brand.yaml (default: config/brand.yaml)")
+    ap.add_argument("--clips-file", default=None,
+                    help="pre-made clips.json (skips the Claude API call — agent-in-the-loop mode)")
     args = ap.parse_args()
 
     clips = process(
@@ -33,6 +35,7 @@ def main() -> None:
         max_clips=args.max_clips,
         music=Path(args.music) if args.music else None,
         config_path=args.config,
+        clips_file=args.clips_file,
     )
     print(f"\nDone. {len(clips)} clips in {args.out}/:")
     for c in clips:
