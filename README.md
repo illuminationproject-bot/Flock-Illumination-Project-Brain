@@ -16,7 +16,7 @@ This repo is the operating system for social content and marketing across two br
 04-analytics/       Weekly analytics report template + KPI definitions
 05-ideas/           Content pillars + daily content ideas (3/day, logged by date)
 06-pipeline/        Footage bank (Drive + iCloud archive) and GHL API publishing setup
-07-finance/         Receipt ↔ Relay statement reconciliation (run /reconcile)
+07-finance/         Nashville First receipt ↔ statement reconciliation via Outlook (run /reconcile)
 scripts/            ghl_publish.py — schedules posts through the GHL API
 ```
 

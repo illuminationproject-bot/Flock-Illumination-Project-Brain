@@ -1,11 +1,9 @@
-# Statement drop zone
+# Statement drop zone (optional)
 
-Put Relay statement exports here. One file per account per month.
+The agent first searches Outlook for the month's statement email. If the
+statement only exists as a download (or the email search can't find it), save
+a copy here.
 
-- **Where to get them**: Relay dashboard → Accounts → Statements → download.
-- **Format**: CSV preferred (the agent parses it directly); PDF also works.
-- **Naming**: `YYYY-MM-relay.csv` — add the account name if you export more
-  than one, e.g. `2026-06-relay-income.csv`, `2026-06-relay-cogs-card.csv`.
-
-The reconciliation agent reads whatever is here for the target month. If the
-month's file is missing it runs in prep mode and reminds you to export it.
+- **Naming**: `YYYY-MM-statement.csv` / `.pdf` / `.xlsx` — add the card name
+  if there's more than one, e.g. `2026-06-statement-visa1234.pdf`.
+- CSV/XLSX parse most reliably; PDF works too.
