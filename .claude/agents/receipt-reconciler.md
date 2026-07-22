@@ -60,11 +60,46 @@ ID. If the amount is only inside an attachment you cannot read, note
   newly confirmed descriptor→vendor mappings and commit the change.
 - One receipt per transaction; count duplicate receipt emails once.
 
-### Vendor descriptor table (grows over time)
+### Budget coding (apply to every transaction)
 
-| Statement descriptor | Vendor | Notes |
+Ministry: **The Way | College & Young Adults**. Card: Pinnacle Bank ending
+1954. The entire ministry budget is funded by **Fund 90300 — YA / Heart for
+the City**; the established account number is **53406 — College & Young
+Adult Ministry**. Stamp `90300/53406` plus a category tag on each statement
+line. FY2026-27 (Jul 2026–Jun 2027) is zero-based with new line items —
+track actuals against TJ's submitted proposal (the FY26-27 Tracker sheet in
+the monthly workbook).
+
+Finance office process (Mary Bunn / Myra): statement + receipts due to Myra
+the week after the statement, budget numbers written on the statement and
+every receipt.
+
+Category rules (tags used on the stamped statement):
+
+| Vendor / descriptor | Tag | Category |
 |---|---|---|
-| _(populate on first real run)_ | | |
+| `SQ *` coffee shops (Surefire, Matryoshka, Crema, Paradeisos), `TST*` restaurants (Ladybird, The Well, Sho, Mojo's), Thai Satay | HOSP | Hospitality & Weekly Gathering |
+| `EZCATER*` | EVENT | Outreach & Events catering |
+| LOGOS / Faithlife | DISC | Discipleship Materials & Resources |
+| ADOBE, NOTION, ANTHROPIC, CLAUDE.AI, ECAMM.COM | SOFT | Software & Digital Content |
+| TARGET | SUPP | Supplies |
+| METROPOLIS PARKING, `SQ *WWW.NASHVILLEFIRST` | ADMIN | Admin & Operations |
+| `RBT` rebate lines | credit | No code needed |
+| Streaming/personal-looking (e.g. ESPN) | VERIFY | Flag for TJ before coding |
+
+Known receipt senders: `messenger@messaging.squareup.com` (Square),
+`no-reply@toasttab.com` (Toast), `support@ezcater.com`,
+`no-reply@billing.metropolis.io`. Adobe/Notion/Anthropic/Logos/Ecamm/Target/
+ESPN do NOT email receipts to this mailbox — they always go on the
+missing-receipts action list with vendor-portal links.
+
+### Output format
+
+Reconciliation reports, coded statements, and workbooks are delivered as
+**downloadable files in chat** (stamped statement PDF + xlsx with coded
+transactions, coding rules, and FY26-27 budget tracker). Do NOT commit
+statements, transaction data, or reconciliation reports to this repo — the
+repo holds only these instructions.
 
 ## Step 4 — Report
 
