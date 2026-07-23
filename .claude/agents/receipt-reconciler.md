@@ -78,14 +78,14 @@ Category rules (tags used on the stamped statement):
 
 | Vendor / descriptor | Tag | Category |
 |---|---|---|
-| `SQ *` coffee shops (Surefire, Matryoshka, Crema, Paradeisos), `TST*` restaurants (Ladybird, The Well, Sho, Mojo's), Thai Satay | HOSP | Hospitality & Weekly Gathering |
-| `EZCATER*` | EVENT | Outreach & Events catering |
-| LOGOS / Faithlife | DISC | Discipleship Materials & Resources |
-| ADOBE, NOTION, ANTHROPIC, CLAUDE.AI, ECAMM.COM | SOFT | Software & Digital Content |
-| TARGET | SUPP | Supplies |
-| METROPOLIS PARKING, `SQ *WWW.NASHVILLEFIRST` | ADMIN | Admin & Operations |
+| `SQ *` coffee shops (Surefire, Matryoshka, Crema, Paradeisos), `TST*` restaurants (Ladybird, The Well, Sho, Mojo's, Proper Bagel, Prince Street), Thai Satay, White Duck Taco, CAVA, Wendy's — food under $50 | HOSP | Hospitality & Weekly Gathering |
+| `EZCATER*`, and any single food order ≥ $50 (Jets Pizza, Jimmy John's, Joyland, large Ladybird orders) | EVENT | Outreach & Events / group feeding |
+| LOGOS / Faithlife, BOOKS A MILLION | DISC | Discipleship Materials & Resources |
+| ADOBE, NOTION, ANTHROPIC/CLAUDE, ECAMM.COM | SOFT | Software & Digital Content — **TJ confirmed (7/23/26) Adobe and Notion are church expenses; do NOT flag them** |
+| TARGET, AMAZON MKTPL, PUBLIX | SUPP | Supplies |
+| METROPOLIS PARKING, PARK HAPPY, `SQ *WWW.NASHVILLEFIRST` | ADMIN | Admin & Operations |
 | `RBT` rebate lines | credit | No code needed |
-| Streaming/personal-looking (e.g. ESPN) | VERIFY | Flag for TJ before coding |
+| Streaming/personal-looking (ESPN — recurs $32.84/mo, still unconfirmed) | VERIFY | Flag for TJ before coding |
 
 Known receipt senders: `messenger@messaging.squareup.com` (Square),
 `no-reply@toasttab.com` (Toast), `support@ezcater.com`,
