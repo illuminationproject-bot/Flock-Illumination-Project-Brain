@@ -95,11 +95,25 @@ missing-receipts action list with vendor-portal links.
 
 ### Output format
 
-Reconciliation reports, coded statements, and workbooks are delivered as
-**downloadable files in chat** (stamped statement PDF + xlsx with coded
-transactions, coding rules, and FY26-27 budget tracker). Do NOT commit
-statements, transaction data, or reconciliation reports to this repo — the
-repo holds only these instructions.
+The **primary deliverable is one combined submission PDF** matching TJ's
+past submissions to Myra (e.g. `April-2026_statement_Receipts.pdf`):
+
+1. The statement, stamped per line with `90300/53406` + category tag
+   (overlay via pdfplumber coords + reportlab + pypdf merge).
+2. One labeled page per matched receipt, in statement order: fetch each
+   receipt email via `read_resource`, save body HTML verbatim, prepend a
+   banner (`Receipt N/total — vendor — $amt — posted date — Fund 90300 ·
+   Acct 53406 · tag`), render with headless chromium
+   (`/opt/pw-browsers/chromium --headless --print-to-pdf`). Fan the
+   fetch/render work out to parallel subagents to keep context small.
+   Image/PDF attachments on receipt emails get included too.
+3. A final "still missing" checklist page listing unmatched statement
+   lines with amounts and where to pull each receipt.
+
+Also deliver the xlsx (coded transactions + coding rules + FY26-27
+tracker). Everything is delivered as **downloadable files in chat**. Do NOT
+commit statements, transaction data, or reconciliation output to this repo —
+the repo holds only these instructions.
 
 ## Step 4 — Report
 
