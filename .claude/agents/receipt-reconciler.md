@@ -81,17 +81,38 @@ Category rules (tags used on the stamped statement):
 | `SQ *` coffee shops (Surefire, Matryoshka, Crema, Paradeisos), `TST*` restaurants (Ladybird, The Well, Sho, Mojo's, Proper Bagel, Prince Street), Thai Satay, White Duck Taco, CAVA, Wendy's — food under $50 | HOSP | Hospitality & Weekly Gathering |
 | `EZCATER*`, and any single food order ≥ $50 (Jets Pizza, Jimmy John's, Joyland, large Ladybird orders) | EVENT | Outreach & Events / group feeding |
 | LOGOS / Faithlife, BOOKS A MILLION | DISC | Discipleship Materials & Resources |
-| ADOBE, NOTION, ANTHROPIC/CLAUDE, ECAMM.COM, ESPN | SOFT | Software & Subscriptions — **TJ confirmed (7/23/26) Adobe, Notion, and ESPN are church expenses; do NOT flag them** |
+| ADOBE, NOTION, ANTHROPIC/CLAUDE, ECAMM.COM, ESPN, ASANA.COM | SOFT | Software & Subscriptions — **TJ confirmed (7/23/26) Adobe, Notion, and ESPN are church expenses; do NOT flag them** |
 | TARGET, AMAZON MKTPL, PUBLIX | SUPP | Supplies |
-| METROPOLIS PARKING, PARK HAPPY, `SQ *WWW.NASHVILLEFIRST` | ADMIN | Admin & Operations |
+| `FACEBK *` (Meta ads) | MKTG | Digital Content & Social Media |
+| OVERNIGHTPRINTS.COM | PRINT | Print & Promotional Materials |
+| METROPOLIS PARKING, PARK HAPPY, PMC - PAID PARKING, `SQ *WWW.NASHVILLEFIRST`, `VCO*FIRST BAPTIST CHUR` | ADMIN | Admin & Operations |
 | `RBT` rebate lines | credit | No code needed |
 | Genuinely unknown/personal-looking vendors | VERIFY | Flag for TJ before coding |
 
-Known receipt senders: `messenger@messaging.squareup.com` (Square),
+Event clusters: when many unfamiliar food/vendor charges land on one day, they
+are usually a single event — check email for an invoice naming it (e.g. Casey
+Ray Music invoice "First Fest 8/22/26" identified the whole 8/22 cluster:
+Sippin in the City, Bubble Love, Camburgers, DoughJo, Steel Pony, MCE 313).
+Tag the whole cluster EVENT and name the event in the vendor label. Ticketed
+outings (NASHVILLE SOUNDS + NSH SOUNDS PARKING) are EVENT too.
+
+**Card last-4 "0602" on Square/Toast receipts is the Apple Pay device number
+for card ...1954** — it is NOT a different card. Do not flag it.
+
+Known receipt senders: `messenger@messaging.squareup.com` (Square — also sends
+"You paid an invoice!" emails that are valid proof of payment),
 `no-reply@toasttab.com` (Toast), `support@ezcater.com`,
-`no-reply@billing.metropolis.io`. Adobe/Notion/Anthropic/Logos/Ecamm/Target/
-ESPN do NOT email receipts to this mailbox — they always go on the
-missing-receipts action list with vendor-portal links.
+`no-reply@loke.global` (Jets Pizza), `noreply@notifications.parkingmgt.com`
+(PMC parking), `support@ezcater.com`. Adobe/Notion/Anthropic/Asana/Logos/
+Ecamm/Target/ESPN/Meta do NOT email receipts to this mailbox — they go on the
+records page with vendor-portal links. For Meta, point TJ at Ads Manager →
+Billing → download all of the month's receipts at once rather than listing
+each ad charge separately.
+
+Watch for charges that belong to a **different account**: e.g. Mike Mann
+(8/13/26) directed the Austin Green care-basket receipts to the church
+Benevolence account, not 90300/53406. Flag any charge that a staff email ties
+to another fund.
 
 ### Output format
 
