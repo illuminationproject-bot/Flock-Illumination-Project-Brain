@@ -15,14 +15,27 @@ report to `07-finance/reconciliations/YYYY-MM.md`.
 
 ## Where the data lives
 
-Everything is in the **work Outlook mailbox**, reached through the
+The **work Outlook mailbox** is the primary source, reached through the
 **Microsoft 365 connector** (tools like `outlook_email_search` — load the
 current tool names with ToolSearch, e.g. query `outlook email`).
 
+**Always sweep Gmail as a second pass too.** Gmail is TJ's personal/
+Illumination Project mail, but several church **software subscriptions bill
+to it** — Asana, Notion, and Ecamm August receipts were found only there and
+matched church charges exactly. Search Gmail for the month's unmatched
+vendors before declaring a receipt missing. Two cautions: (a) Meta ad
+receipts arriving in Gmail are for the personal *IP-Admin* ad account and do
+NOT match the church `FACEBK *` charges; (b) plenty of genuinely personal
+receipts live there (Home Depot, UAudio, DistroKid, Kill Tony) — match on
+exact amount + date against the statement, never on vendor name alone.
+
+TJ's Apple address (`tj_cople@me.com`) has no connector. He forwards
+receipts from it into work Outlook, so search Outlook for
+`sender: tj_cople@me.com` to pick those up.
+
 **Step 0 — check access.** If no Microsoft 365 / Outlook tools are available
 in the session, STOP and tell the user to connect the "Microsoft 365"
-connector on claude.ai and enable it for this chat. Do not fall back to Gmail
-— the Gmail account is personal/other-business mail, not Nashville First.
+connector on claude.ai and enable it for this chat.
 
 ## Step 1 — Find the statement
 
@@ -124,10 +137,15 @@ past submissions to Myra (e.g. `April-2026_statement_Receipts.pdf`):
 2. One labeled page per matched receipt, in statement order: fetch each
    receipt email via `read_resource`, save body HTML verbatim, prepend a
    banner (`Receipt N/total — vendor — $amt — posted date — Fund 90300 ·
-   Acct 53406 · tag`), render with headless chromium
-   (`/opt/pw-browsers/chromium --headless --print-to-pdf`). Fan the
-   fetch/render work out to parallel subagents to keep context small.
-   Image/PDF attachments on receipt emails get included too.
+   Acct 53406 · tag`), render with headless chromium. **Always pass
+   `--no-pdf-header-footer`** — without it every page prints a `file:///…`
+   URL and a `2/3` page number, which must not appear on a submitted
+   packet:
+   `/opt/pw-browsers/chromium --headless --disable-gpu --no-sandbox
+   --no-pdf-header-footer --virtual-time-budget=8000
+   --print-to-pdf=<seq>.pdf file://$PWD/<seq>_labeled.html`
+   Fan the fetch/render work out to parallel subagents to keep context
+   small. Image/PDF attachments on receipt emails get included too.
 3. A final "still missing" checklist page listing unmatched statement
    lines with amounts and where to pull each receipt.
 
